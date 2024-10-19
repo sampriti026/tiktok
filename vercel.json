@@ -4,11 +4,7 @@
       { "source": "/(.*)", "destination": "/client/$1" }
     ],
     "builds": [
-      { "src": "client/package.json", "use": "@vercel/node" },
+      { "src": "client/package.json", "use": "@vercel/static-build" },
       { "src": "api/**/*.js", "use": "@vercel/node" }
-    ],
-    "routes": [
-      { "src": "/api/(.*)", "dest": "/api/$1" },
-      { "src": "/(.*)", "dest": "/client/$1" }
     ]
 }

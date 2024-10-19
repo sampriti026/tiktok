@@ -1,9 +1,9 @@
 {
-  "name": "tiktok-video-scheduler-server",
+  "name": "tiktok-video-scheduler",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node api/server.js"
+    "build": "cd client && npm run build"
   },
   "dependencies": {
     "node-fetch": "^3.2.0"
