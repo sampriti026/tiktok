@@ -1,1 +1,11 @@
- 
+{
+  "name": "tiktok-video-scheduler-server",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node api/server.js"
+  },
+  "dependencies": {
+    "node-fetch": "^3.2.0"
+  }
+}
