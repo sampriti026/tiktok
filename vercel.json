@@ -2,15 +2,5 @@
     "rewrites": [
       { "source": "/api/(.*)", "destination": "/api/$1" },
       { "source": "/(.*)", "destination": "/client/$1" }
-    ],
-    "env": {
-      "REACT_APP_TIKTOK_CLIENT_KEY": "${REACT_APP_TIKTOK_CLIENT_KEY}",
-      "REACT_APP_REDIRECT_URI": "${REACT_APP_REDIRECT_URI}"
-    },
-    "build": {
-      "env": {
-        "REACT_APP_TIKTOK_CLIENT_KEY": "@react_app_tiktok_client_key",
-        "REACT_APP_REDIRECT_URI": "@react_app_redirect_uri"
-      }
-    }
+    ]
 }

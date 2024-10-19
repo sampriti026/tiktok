@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   const { code, state } = req.query;
   const CLIENT_KEY = process.env.TIKTOK_CLIENT_KEY;
   const CLIENT_SECRET = process.env.TIKTOK_CLIENT_SECRET;
-  const REDIRECT_URI = process.env.REDIRECT_URI || 'https://your-vercel-app.vercel.app/api/callback';
+  const REDIRECT_URI = process.env.REDIRECT_URI || 'https://tikok26.app/api/callback';
 
   try {
     const tokenResponse = await fetch('https://open-api.tiktok.com/oauth/access_token/', {

@@ -2,8 +2,8 @@ import React from 'react';
 import crypto from 'crypto-js';
 
 const SchedulePosts = () => {
-  const CLIENT_KEY = process.env.REACT_APP_TIKTOK_CLIENT_KEY;
-  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || 'https://your-vercel-app.vercel.app/api/callback';
+  const CLIENT_KEY = process.env.REACT_APP_TIKTOK_CLIENT_KEY || process.env.TIKTOK_CLIENT_KEY;
+  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || process.env.REDIRECT_URI || 'https://your-vercel-app.vercel.app/api/callback';
 
   const generateCodeVerifier = () => {
     return crypto.lib.WordArray.random(32).toString(crypto.enc.Base64url);
