@@ -4,11 +4,8 @@
       { "source": "/(.*)", "destination": "/client/$1" }
     ],
     "env": {
-      "TIKTOK_CLIENT_KEY": "@tiktok_client_key",
-      "TIKTOK_CLIENT_SECRET": "@tiktok_client_secret",
-      "REDIRECT_URI": "@redirect_uri",
-      "REACT_APP_TIKTOK_CLIENT_KEY": "@react_app_tiktok_client_key",
-      "REACT_APP_REDIRECT_URI": "@react_app_redirect_uri"
+      "REACT_APP_TIKTOK_CLIENT_KEY": "${REACT_APP_TIKTOK_CLIENT_KEY}",
+      "REACT_APP_REDIRECT_URI": "${REACT_APP_REDIRECT_URI}"
     },
     "build": {
       "env": {
