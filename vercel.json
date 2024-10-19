@@ -2,6 +2,9 @@
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/tiktokcGxjMrtAoTKFZuJt6BDQUq0MmMnnOtuU.txt", "destination": "/tiktokcGxjMrtAoTKFZuJt6BDQUq0MmMnnOtuU.txt" },
+    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
+    { "source": "/terms-and-conditions", "destination": "/terms-and-conditions.html" },
+
     { "source": "/(.*)", "destination": "/client/$1" }
   ],
   "builds": [
