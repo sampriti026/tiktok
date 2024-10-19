@@ -3,25 +3,13 @@ import crypto from 'crypto-js';
 
 const SchedulePosts = () => {
   const CLIENT_KEY = process.env.REACT_APP_TIKTOK_CLIENT_KEY;
-  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || 'https://tiktok26.vercel.app/api/callback';
-
-  console.log('CLIENT_KEY:', CLIENT_KEY);
-  console.log('REDIRECT_URI:', REDIRECT_URI);
-
-  const generateCodeVerifier = () => {
-    return crypto.lib.WordArray.random(32).toString(crypto.enc.Base64url);
-  };
-
-  const generateCodeChallenge = (codeVerifier) => {
-    return crypto.SHA256(codeVerifier).toString(crypto.enc.Base64url);
-  };
+  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || 'https://your-vercel-app.vercel.app/api/callback';
 
   const handleTikTokLogin = () => {
     const csrfState = Math.random().toString(36).substring(2);
     const codeVerifier = generateCodeVerifier();
     const codeChallenge = generateCodeChallenge(codeVerifier);
 
-    // Store these in localStorage or state management for later use
     localStorage.setItem('csrfState', csrfState);
     localStorage.setItem('codeVerifier', codeVerifier);
 
@@ -39,6 +27,14 @@ const SchedulePosts = () => {
     console.log('Login URL:', url.toString()); // For debugging
 
     window.location.href = url.toString();
+  };
+
+  const generateCodeVerifier = () => {
+    return crypto.lib.WordArray.random(32).toString(crypto.enc.Base64url);
+  };
+
+  const generateCodeChallenge = (codeVerifier) => {
+    return crypto.SHA256(codeVerifier).toString(crypto.enc.Base64url);
   };
 
   return (

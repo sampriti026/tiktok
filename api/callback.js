@@ -7,10 +7,11 @@ export default async function handler(req, res) {
   const REDIRECT_URI = process.env.REDIRECT_URI || 'https://tikok26.app/api/callback';
 
   try {
-    const tokenResponse = await fetch('https://open-api.tiktok.com/oauth/access_token/', {
+    const tokenResponse = await fetch('https://open.tiktokapis.com/v2/oauth/token/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
+        'Cache-Control': 'no-cache',
       },
       body: new URLSearchParams({
         client_key: CLIENT_KEY,
@@ -23,13 +24,19 @@ export default async function handler(req, res) {
 
     const tokenData = await tokenResponse.json();
 
-    if (tokenData.data && tokenData.data.access_token) {
-      res.redirect(`/dashboard?token=${tokenData.data.access_token}`);
+    if (tokenData.access_token) {
+      // Store these values securely on your server
+      console.log('Access Token:', tokenData.access_token);
+      console.log('Refresh Token:', tokenData.refresh_token);
+      console.log('Open ID:', tokenData.open_id);
+
+      res.redirect(`/dashboard?token=${tokenData.access_token}&openId=${tokenData.open_id}`);
     } else {
-      res.status(400).send('Failed to obtain access token');
+      console.error('Token Exchange Error:', tokenData);
+      res.status(400).json({ error: 'Failed to obtain access token', details: tokenData });
     }
   } catch (error) {
     console.error('Error in token exchange:', error);
-    res.status(500).send('Internal server error');
+    res.status(500).json({ error: 'Internal server error' });
   }
 }
