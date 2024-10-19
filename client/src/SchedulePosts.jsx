@@ -2,8 +2,11 @@ import React from 'react';
 import crypto from 'crypto-js';
 
 const SchedulePosts = () => {
-  const CLIENT_KEY = process.env.REACT_APP_TIKTOK_CLIENT_KEY || process.env.TIKTOK_CLIENT_KEY;
-  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || process.env.REDIRECT_URI || 'https://your-vercel-app.vercel.app/api/callback';
+  const CLIENT_KEY = process.env.REACT_APP_TIKTOK_CLIENT_KEY;
+  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || 'https://tiktok26.vercel.app/api/callback';
+
+  console.log('CLIENT_KEY:', CLIENT_KEY);
+  console.log('REDIRECT_URI:', REDIRECT_URI);
 
   const generateCodeVerifier = () => {
     return crypto.lib.WordArray.random(32).toString(crypto.enc.Base64url);
@@ -14,24 +17,28 @@ const SchedulePosts = () => {
   };
 
   const handleTikTokLogin = () => {
+    const csrfState = Math.random().toString(36).substring(2);
     const codeVerifier = generateCodeVerifier();
     const codeChallenge = generateCodeChallenge(codeVerifier);
-    
+
+    // Store these in localStorage or state management for later use
+    localStorage.setItem('csrfState', csrfState);
     localStorage.setItem('codeVerifier', codeVerifier);
 
-    const csrfState = Math.random().toString(36).substring(2);
-    localStorage.setItem('csrfState', csrfState);
+    const scope = 'user.info.basic,video.upload,video.publish';
 
-    let url = 'https://www.tiktok.com/v2/auth/authorize/';
-    url += `?client_key=${CLIENT_KEY}`;
-    url += '&scope=user.info.basic,video.upload,video.publish';
-    url += '&response_type=code';
-    url += `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}`;
-    url += `&state=${csrfState}`;
-    url += `&code_challenge=${codeChallenge}`;
-    url += '&code_challenge_method=S256';
+    const url = new URL('https://www.tiktok.com/v2/auth/authorize/');
+    url.searchParams.append('client_key', CLIENT_KEY);
+    url.searchParams.append('response_type', 'code');
+    url.searchParams.append('scope', scope);
+    url.searchParams.append('redirect_uri', REDIRECT_URI);
+    url.searchParams.append('state', csrfState);
+    url.searchParams.append('code_challenge', codeChallenge);
+    url.searchParams.append('code_challenge_method', 'S256');
 
-    window.location.href = url;
+    console.log('Login URL:', url.toString()); // For debugging
+
+    window.location.href = url.toString();
   };
 
   return (
