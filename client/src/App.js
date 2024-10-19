@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SchedulePosts from './SchedulePosts';
-import Dashboard from '../client/src/Dashboard';
+import Dashboard from './Dashboard';
 
 function App() {
   return (
