@@ -4,18 +4,10 @@
     { "source": "/tiktokcGxjMrtAoTKFZuJt6BDQUq0MmMnnOtuU.txt", "destination": "/tiktokcGxjMrtAoTKFZuJt6BDQUq0MmMnnOtuU.txt" },
     { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
     { "source": "/terms-and-conditions", "destination": "/terms-and-conditions.html" },
-
     { "source": "/(.*)", "destination": "/client/$1" }
   ],
   "builds": [
-    {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "buildCommand": "cd client && npm run build",
-        "distDir": "build"
-      }
-    },
+    { "src": "client/package.json", "use": "@vercel/static-build", "config": { "distDir": "build" } },
     { "src": "api/**/*.js", "use": "@vercel/node" }
   ],
   "env": {
