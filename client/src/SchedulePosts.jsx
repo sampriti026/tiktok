@@ -3,7 +3,7 @@ import crypto from 'crypto-js';
 
 const SchedulePosts = () => {
   const CLIENT_KEY = process.env.REACT_APP_TIKTOK_CLIENT_KEY;
-  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || 'https://tiktok26.vercel.app/api/tiktok-auth/callback';
+  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || 'https://tiktok26.vercel.app/api/callback';
 
   const handleTikTokLogin = () => {
     const csrfState = Math.random().toString(36).substring(2);
